@@ -98,7 +98,7 @@ int part1(vector<vector<int>> grid) {
 int part2(vector<vector<int>> grid) {
     int rows = grid.size();
     int cols = grid[0].size();
-    
+
     // Check all locations
     // Four directions
     int dirs[4][2] = {
@@ -122,7 +122,6 @@ int part2(vector<vector<int>> grid) {
 
                 int r = row;
                 int c = col;
-                
                 int count = 0;
 
                 // Stay within edges
