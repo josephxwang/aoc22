@@ -1,3 +1,5 @@
+// Analyze grid of numbers to see which are visible
+
 #include <iostream>
 #include <fstream>
 #include <vector>

@@ -1,3 +1,5 @@
+// Modify pairs of numbers, one tracking another
+
 #include <iostream>
 #include <fstream>
 #include <unordered_set>
@@ -74,6 +76,7 @@ void move_knot(pair<int, int>& knot1, pair<int, int>& knot2) {
     }
 }
 
+// Modify 2 tracking knots
 int part1() {
     ifstream infile("input.txt");
     char dir;
@@ -101,6 +104,7 @@ int part1() {
     return coords.size();
 }
 
+// Modify 10 tracking knots
 int part2() {
     ifstream infile("input.txt");
     char dir;
