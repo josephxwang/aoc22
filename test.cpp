@@ -3,13 +3,9 @@
 using namespace std;
 
 int main() {
-    string s1, s2;
-    s1 = "Hello";
+    int a = 121;
+    int b = -131;
 
-    s2 = s1;
-
-    s1 = "Hi";
-
-    cout << s1 << endl;
-    cout << s2 << endl;
+    cout << (bool)a << endl;
+    cout << (bool)b << endl;
 }

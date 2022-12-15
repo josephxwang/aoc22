@@ -1,18 +1,21 @@
 #include <iostream>
-#include <fstream>
 #include <chrono>
 
 using namespace std;
 
 int part1() {
-    ifstream infile("test.txt");
+    while (getline(cin, line) && line.size() > 0) {
+        
+    }
 
     return 0;
 }
 
 int part2() {
-    ifstream infile("test.txt");
-    
+    while (getline(cin, line) && line.size() > 0) {
+        
+    }
+
     return 0;
 }
 
