@@ -183,7 +183,10 @@ int part2() {
 
     // For test.txt, rocks seem to repeat on a 35 rock pattern starting from about rock 92
     // For input.txt, rocks seem to repeat on a 1700 rock pattern starting from rock 3406
-    int rock_count = 3406 + 194;
+    // For Erg, rocks seem to repeat on a 1720 rock pattern starting from rock 3449
+    // int rock_count = 3406 + 194;
+    // int rock_count = 3449 + 1431;
+    int rock_count = 5 * 10091;
 
     // Convert jet pattern to vector of bools
     vector<bool> is_rights;
@@ -304,10 +307,10 @@ int part2() {
             i++;
 
             // If circled through jet pattern
-            // if (i % is_rights.size() == 0) {
-            //     // Print current rock and current height
-            //     cout << rock_i << " " << rock_i % rocks.size() << " " << height << endl;
-            // }
+            if (i % is_rights.size() == 0) {
+                // Print current rock and current height
+                cout << rock_i << " " << rock_i % rocks.size() << " " << height << endl;
+            }
 
             // Try to move rock up (originally down)
             has_collision = false;
