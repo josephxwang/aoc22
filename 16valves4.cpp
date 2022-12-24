@@ -67,6 +67,15 @@ int part1() {
             adj_mat[r].push_back(0);
         }
     }
+
+    vector<vector<string>> adj_mat_parent;
+
+    for (int r = 0; r < val_valves.size(); r++) {
+        adj_mat_parent.push_back({});
+        for (int c = 0; c < val_valves.size(); c++) {
+            adj_mat_parent[r].push_back("");
+        }
+    }
     
     // BFS from all value valves to all other value valves
     for (auto u : val_valves) {
@@ -74,13 +83,15 @@ int part1() {
         q.push_back(u.first);
 
         // Track valves visited and distance
-        unordered_map<string, int> visited;
+        unordered_map<string, visit> visited;
 
         for (auto node : graph) {
-            visited[node.first] = -1;
+            visited[node.first].dist = -1;
+            visited[node.first].parent = "";
         }
 
-        visited[u.first] = 0;
+        visited[u.first].dist = 0;
+        visited[u.first].parent = u.first;
 
         while (!q.empty()) {
             string curr = q.front();
@@ -88,13 +99,13 @@ int part1() {
 
             for (string nbr : graph[curr]) {
                 // If not visited
-                if (visited[nbr] == -1) {
-                    visited[nbr] = visited[curr] + 1;
+                if (visited[nbr].dist == -1) {
+                    visited[nbr].dist = visited[curr].dist + 1;
 
                     // If a value valve
                     if (val_valves.find(nbr) != val_valves.end()) {
-                        adj_mat[val_valves[u.first]][val_valves[nbr]] = visited[nbr];
-                        adj_mat[val_valves[nbr]][val_valves[u.first]] = visited[nbr];
+                        adj_mat[val_valves[u.first]][val_valves[nbr]] = visited[nbr].dist;
+                        adj_mat[val_valves[nbr]][val_valves[u.first]] = visited[nbr].dist;
                     }
 
                     q.push_back(nbr);
@@ -110,6 +121,8 @@ int part1() {
         }
         cout << endl;
     }
+
+    // @@ NEED TO TRACK LAST VALUE VALVE
 
     // @@ TEST ON LARGER SAMPLE, SEE IF CORRECT
     // @@ THEN BUILD ADJACENCY MATRIX AND SEE IF CAN MAKE PROGRESS BY INSPECTION 
