@@ -2,46 +2,45 @@
 #include <fstream>
 #include <chrono>
 #include <vector>
+#include <math.h>
 
 using namespace std;
 
-int part1() {
-    ifstream infile("test.txt");
+long long part1() {
+    ifstream infile("input.txt");
     string line;
 
+    long long total = 0;
     while (getline(infile, line)) {
-    
-    }
+        long long value = 0;
+        for (int digit = 0; digit < line.size(); digit++) {
+            char c = line[digit];
 
-    // Directions, also option to stay put
-    int dirs[5][2] = {
-        {0,1},
-        {1,0},
-        {0,0},
-        {0,-1},
-        {-1,0}
-    };
+            // Powers of 5
+            long long place = pow(5, line.size() - digit - 1);
 
-    // Try a DFS first
-    vector<int> stack = {};
-
-    while (!stack.empty()) {
-
-
-        // Check neighbors
-        for (int i = 0; i < 5; i++) {
-            int dr = dirs[i][0];
-            int dc = dirs[i][1];
-
-            // Also if an open spot
-            if (r+dr >= 0 && r+dr < rows && c+dc >= 0 && c+dc < cols) {
-            
-
+            switch (c) {
+                case '2':
+                    value += 2 * place;
+                    break;
+                case '1':
+                    value += 1 * place;
+                    break;
+                case '-':
+                    value += -1 * place;
+                    break;
+                case '=':
+                    value += -2 * place;
+                    break;
             }
         }
+
+        total += value;
     }
 
-    return 0;
+    cout << total << endl;
+
+    return total;
 }
 
 int part2() {

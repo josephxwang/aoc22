@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_set>
+#include <math.h>
 
 using namespace std;
 
@@ -11,5 +12,5 @@ int main() {
 
     l1 = {};
 
-    cout << l2.size();
+    cout << pow(5, 3) << endl;
 }
