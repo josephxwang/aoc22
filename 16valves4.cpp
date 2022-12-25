@@ -14,6 +14,10 @@ struct visit {
     string parent;
 };
 
+int rec_dfs(int total, int flow, int curr, unordered_set<int> visited, vector<int>& totals) {
+    
+}
+
 int part1() {
     ifstream infile("16input.txt");
     string line;
@@ -110,6 +114,52 @@ int part1() {
 
                     q.push_back(nbr);
                 }
+            }
+        }
+    }
+
+    // Check all paths (DFS)
+    vector<int> totals = {};
+
+    rec_dfs(0, 0, 0, {}, totals);
+
+    cout << max(totals) << endl;
+
+    q.push({0, 0});
+
+    // Distances
+    vector<int> dists;
+
+    for (int i = 0; i < adj_mat.size(); i++) {
+        dists.push_back(100);
+    }
+    
+    dists[0] = 0;
+
+    while (!q.empty()) {
+        pair<int, int> curr = q.top();
+        int curr_dist = curr.first;
+        int curr_id = curr.second;
+        q.pop();
+
+        // Check all neighbors
+        for (int i = 1; i < adj_mat.size(); i++) {
+            // Skip if self
+            if (i == curr_id) {
+                continue;
+            }
+            
+            // If found new shorter path
+            if (adj_mat[curr_id][i] + curr_dist < dists[i]) {
+                visited[nbr].dist = visited[curr].dist + 1;
+
+                // If a value valve
+                if (val_valves.find(nbr) != val_valves.end()) {
+                    adj_mat[val_valves[u.first]][val_valves[nbr]] = visited[nbr].dist;
+                    adj_mat[val_valves[nbr]][val_valves[u.first]] = visited[nbr].dist;
+                }
+
+                q.push(nbr);
             }
         }
     }
