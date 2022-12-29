@@ -7,7 +7,7 @@
 using namespace std;
 
 int part1() {
-    ifstream infile("input.txt");
+    ifstream infile("19naod.txt");
     string line;
 
     // Save robot costs
@@ -44,12 +44,13 @@ int part1() {
     }
 
     vector<int> geodes;
+    int look_ahead = 1;
 
     for (auto blueprint : blueprints) {
         vector<int> current_geodes;
 
         // For different amounts of ore robots
-        for (int ore_rob_count = 1; ore_rob_count < 5; ore_rob_count++) {
+        for (int ore_rob_count = 1; ore_rob_count < 6; ore_rob_count++) {
             vector<int> robots = {1,0,0,0};
             vector<int> minerals = {0,0,0,0};
             
@@ -77,7 +78,7 @@ int part1() {
                     // Check if need to save ore for future geode robots
                     // If within 2 turns of having enough obsidian and don't have enough ore
                     if (blueprint[3][2] > minerals[2] 
-                        and blueprint[3][2] - minerals[2] <= robots[2] * 2 
+                        and blueprint[3][2] - minerals[2] <= robots[2] * look_ahead 
                         and blueprint[3][0] > (minerals[0] - blueprint[2][0] + robots[0])) {
                         
                     }
@@ -97,7 +98,7 @@ int part1() {
 
                     // Check if need to save ore for future obsidian robots
                     if (blueprint[2][1] > minerals[1] 
-                        and blueprint[2][1] - minerals[1] <= robots[1] * 2 
+                        and blueprint[2][1] - minerals[1] <= robots[1] * look_ahead 
                         and blueprint[2][0] > (minerals[0] - blueprint[1][0] + robots[0])) {
 
                     }
@@ -122,6 +123,8 @@ int part1() {
             }
 
             current_geodes.push_back(minerals[3]);
+            // cout << "Starting ore robots: " << ore_rob_count << endl;
+            // cout << minerals[3] << endl;
         }
         
 
@@ -133,6 +136,8 @@ int part1() {
                 max_geodes = geode;
             }
         }
+
+        cout << max_geodes << endl;
         
         geodes.push_back(max_geodes);
     }
