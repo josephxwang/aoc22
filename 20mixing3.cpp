@@ -143,7 +143,7 @@ long long part2() {
         cout << endl;
 
         for (int i = 0; i < n; i++) {
-            int curr = num_origs[i];
+            long long curr = num_origs[i];
             
             // Numbers wrap around on n-1, not n, because of weird insertion logic
             curr %= (n-1);
@@ -159,37 +159,37 @@ long long part2() {
                 new_i = n-1;
             }
 
-            // Correct negative index
-            new_i = (new_i + n) % n;
+            // // Correct negative index
+            // new_i = (new_i + n) % n;
 
             // First delete old number
             i_news.erase(i_news.begin() + start_i);
 
-            // If before self
-            if (new_i <= start_i) {
-                i_news.insert(i_news.begin()+new_i, i);
-            }
-            // If after self
-            else if (new_i > start_i) {
-                i_news.insert(i_news.begin()+new_i-1, i);
-            }
-
-            // If wrapping around from the front (negative index)
-            // if (new_i < 0) {
-            //     new_i = (new_i + n) % n - 1;
-
+            // // If before self
+            // if (new_i <= start_i) {
             //     i_news.insert(i_news.begin()+new_i, i);
             // }
-            // else {
-            //     // If number moved forward in list by wrapping back
-            //     if (new_i < start_i and curr > 0) {
-            //         i_news.insert(i_news.begin()+new_i+1, i);
-            //     }
-            //     // If moved back in list
-            //     else {
-            //         i_news.insert(i_news.begin()+new_i, i);
-            //     }  
+            // // If after self
+            // else if (new_i > start_i) {
+            //     i_news.insert(i_news.begin()+new_i-1, i);
             // }
+
+            // If wrapping around from the front (negative index)
+            if (new_i < 0) {
+                new_i = (new_i + n) % n - 1;
+
+                i_news.insert(i_news.begin()+new_i, i);
+            }
+            else {
+                // If number moved forward in list by wrapping back
+                if (new_i < start_i and curr > 0) {
+                    i_news.insert(i_news.begin()+new_i+1, i);
+                }
+                // If moved back in list
+                else {
+                    i_news.insert(i_news.begin()+new_i, i);
+                }  
+            }
         }
     }
 
